@@ -28,12 +28,6 @@ The ApvGuessr user script is designed to work on the GeoGuessr platform, includi
 
 This user script aims to enhance the GeoGuessr experience by providing additional features. However, please use it responsibly and avoid overusing it to maintain the integrity of the game. Excessive use or unrealistic behavior may lead to unintended consequences.
 
-## Compatibility
-
-The ApvGuessr user script is designed to work on websites using the GeoGuessr platform.
-
-- **Supported Browsers:** [List of browsers supported by userscript managers]
-
 ## Notes
 
 - The user script utilizes Google Maps services for retrieving metadata. Keep in mind that using such services might be subject to usage limitations.
