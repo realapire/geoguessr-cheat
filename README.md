@@ -1,4 +1,4 @@
-# ApvGuessr User Script
+# ApvGuessr
 
 ## Description
 
