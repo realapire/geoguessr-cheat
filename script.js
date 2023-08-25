@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  apv
 // @author       You
-// @match		 http*://*/*
+// @match		 http*://www.geoguessr.com/*
 // @grant        none
 // ==/UserScript==
 
