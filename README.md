@@ -1,6 +1,6 @@
 # ApvGuesser - GeoGuessr Extractor Chrome Extension
 
-**WORKING**
+**TESTED IN EVERY GAMEMODE**
 
 ## How to Use
 
