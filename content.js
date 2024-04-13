@@ -70,7 +70,7 @@ async function getCoordInfo() {
 
 document.addEventListener('keydown', async function (event) {
     if (lat == 999 && long == 999) return;
-    if (event.ctrlKey && event.shiftKey && event.code === 'Space') {
+    if (event.ctrlKey && event.code === 'Space') {
         window.open(`https://www.google.be/maps/search/${convertCoords(lat, long)}`);
     }
     if (event.ctrlKey && event.shiftKey) {
