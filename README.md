@@ -1,4 +1,4 @@
-# GeoGuessr Coordinates Extractor Chrome Extension
+# Apvir - GeoGuessr Extractor Chrome Extension
 
 ## How to Use
 
