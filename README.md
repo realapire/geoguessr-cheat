@@ -13,5 +13,5 @@
 2. **Usage**
    - After installing the extension, navigate to a GeoGuessr game session.
    - The extension will automatically detect and extract the coordinates of the current location.
-   - Press `Ctrl + Shift + Space` to open a new tab with the location plotted on Google Maps.
-   - Press `Ctrl + Shift + Alt` to display a popup alert with the human-readable location information.
+   - Press `Ctrl + Space` to open a new tab with the location plotted on Google Maps.
+   - Press `Ctrl + Alt` to display a popup alert with the human-readable location information.
