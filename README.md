@@ -1,4 +1,4 @@
-# Apvir - GeoGuessr Extractor Chrome Extension
+# ApvGuesser - GeoGuessr Extractor Chrome Extension
 
 ## How to Use
 
