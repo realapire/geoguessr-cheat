@@ -15,14 +15,14 @@
                 "xhr_inject.js"
             ],
             "matches": [
-                "https://www.geoguessr.com/*"
+                "<all_urls>"
             ]
         }
     ],
     "content_scripts": [
         {
             "matches": [
-                "https://www.geoguessr.com/*"
+                "<all_urls>"
             ],
             "js": [
                 "content.js"
