@@ -1,5 +1,7 @@
 # ApvGuesser - GeoGuessr Extractor Chrome Extension
 
+**WORKING**
+
 ## How to Use
 
 1. **Installation**
