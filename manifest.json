@@ -1,0 +1,33 @@
+{
+    "manifest_version": 3,
+    "name": "ApvGuessr",
+    "version": "0.1.1",
+    "description": "Enhance your GeoGuessr experience",
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "scripting",
+        "webRequest"
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "xhr_inject.js"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "all_frames": true
+        }
+    ]
+}
