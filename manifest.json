@@ -12,17 +12,19 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "xhr_inject.js"
+                "xhr_inject.js",
+                "assets/pin.png",
+                "assets/view.png"
             ],
             "matches": [
-                "<all_urls>"
+                "https://www.geoguessr.com/*"
             ]
         }
     ],
     "content_scripts": [
         {
             "matches": [
-                "<all_urls>"
+                "https://www.geoguessr.com/*"
             ],
             "js": [
                 "content.js"
