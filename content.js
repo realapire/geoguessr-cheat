@@ -68,12 +68,43 @@ async function getCoordInfo() {
     }
 }
 
+window.addEventListener('load', async function () {
+    let element = document.querySelector('[class^="styles_columnTwo___"]');
+
+    while (!element) {
+        await new Promise(resolve => setTimeout(resolve, 500));
+        element = document.querySelector('[class^="styles_columnTwo___"]');
+    }
+
+    if (element) {
+        element.innerHTML += `<div class='styles_control__zEkd0'><span class='tooltip_reference__qDBCi'><button id="tellLocation" class='styles_hudButton__jPUdv styles_sizeSmall__xGh28 styles_roundBoth__VjjSQ' data-qa='return-to-start'><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1)" class='styles_iconReturnToStart__PT25v' src='${chrome.runtime.getURL('assets/view.png')}' style='color: transparent;'></button><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div></span></div>`;
+        element.innerHTML += `<div class='styles_control__zEkd0'><span class='tooltip_reference__qDBCi'><button id="showLocation" class='styles_hudButton__jPUdv styles_sizeSmall__xGh28 styles_roundBoth__VjjSQ' data-qa='return-to-start'><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1)" class='styles_iconReturnToStart__PT25v' src='${chrome.runtime.getURL('assets/pin.png')}' style='color: transparent;'></button><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div></span></div>`;
+    }
+
+    document.getElementById('tellLocation').addEventListener('click', async function () {
+        tellLocation();
+    });
+
+    document.getElementById('showLocation').addEventListener('click', async function () {
+        showLocation();
+    });
+});
+
+
 document.addEventListener('keydown', async function (event) {
     if (lat == 999 && long == 999) return;
     if (event.ctrlKey && event.code === 'Space') {
-        window.open(`https://www.google.be/maps/search/${convertCoords(lat, long)}`);
+        showLocation();
     }
     if (event.ctrlKey && event.shiftKey) {
         alert(await getCoordInfo());
     }
 });
+
+async function tellLocation() {
+    alert(await getCoordInfo());
+}
+
+async function showLocation() {
+    window.open(`https://www.google.be/maps/search/${convertCoords(lat, long)}`);
+}
