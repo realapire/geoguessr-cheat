@@ -1,0 +1,35 @@
+{
+    "manifest_version": 3,
+    "name": "ApvGuessr",
+    "version": "0.2",
+    "description": "Enhance your GeoGuessr experience",
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "scripting",
+        "webRequest"
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "xhr_inject.js",
+                "assets/pin.png",
+                "assets/view.png"
+            ],
+            "matches": [
+                "https://www.geoguessr.com/*"
+            ]
+        }
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.geoguessr.com/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "all_frames": true
+        }
+    ]
+}
