@@ -69,26 +69,37 @@ async function getCoordInfo() {
 }
 
 window.addEventListener('load', async function () {
+    let elementsAdded = false;
+
     setInterval(() => {
         let element = document.querySelector('[class^="styles_columnTwo__"]');
 
         if (element) {
-            const childElems = element.querySelectorAll('[class^="styles_control__"]');
-            if (childElems.length != 5) {
-                element.innerHTML += `<a href="#" class="styles_control__a" id="tellLocation" style="margin-bottom: 1rem; position: relative; touch-action: pan-x pan-y; background: rgba(0, 0, 0, .6);border: 0;border-bottom: .0625rem solid rgba(0, 0, 0, .4);cursor: pointer;height:40px;display: flex; align-items: center; justify-content: center;width: 40px;border-radius: 50%"><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1); position: absolute;" class='styles_iconReturnToStart__PT25v' src='${chrome.runtime.getURL('assets/view.png')}' style='color: transparent;'></button><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div>`;
-                element.innerHTML += `<a href="#" class="styles_control__b" id="showLocation" style="margin-bottom: 1rem; position: relative; touch-action: pan-x pan-y; background: rgba(0, 0, 0, .6);border: 0;border-bottom: .0625rem solid rgba(0, 0, 0, .4);cursor: pointer;height:40px;display: flex; align-items: center; justify-content: center;width: 40px;border-radius: 50%"><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1); position: absolute;" class='styles_iconReturnToStart__PT25v' src='${chrome.runtime.getURL('assets/pin.png')}' style='color: transparent;'></button><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div>`;
-            
+            const hasControlA = element.querySelector('.styles_control__a');
+            const hasControlB = element.querySelector('.styles_control__b');
+
+            if (!hasControlA || !hasControlB) {
+                elementsAdded = false;
+            }
+
+            if (!elementsAdded) {
+                element.innerHTML += `<a href="#" class="styles_control__a" id="tellLocation" style="position: relative; touch-action: pan-x pan-y; background: rgba(0, 0, 0, .6);border: 0;border-bottom: .0625rem solid rgba(0, 0, 0, .4);cursor: pointer;height:40px;display: flex; align-items: center; justify-content: center;width: 40px;border-radius: 50%"><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1); position: absolute;" class='styles_iconReturnToStart__PT25v' src='${chrome.runtime.getURL('assets/view.png')}' style='color: transparent;'></a><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div>`;
+                element.innerHTML += `<a href="#" class="styles_control__b" id="showLocation" style="position: relative; touch-action: pan-x pan-y; background: rgba(0, 0, 0, .6);border: 0;border-bottom: .0625rem solid rgba(0, 0, 0, .4);cursor: pointer;height:40px;display: flex; align-items: center; justify-content: center;width: 40px;border-radius: 50%"><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1); position: absolute;" class='styles_iconReturnToStart__PT25v' src='${chrome.runtime.getURL('assets/pin.png')}' style='color: transparent;'></a><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div>`;
+
                 document.getElementById('tellLocation').addEventListener('click', async function () {
                     tellLocation();
                 });
-            
+
                 document.getElementById('showLocation').addEventListener('click', async function () {
                     showLocation();
                 });
+
+                elementsAdded = true;
             }
         }
     }, 50);
 });
+
 
 
 document.addEventListener('keydown', async function (event) {
