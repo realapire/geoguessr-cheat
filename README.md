@@ -21,3 +21,7 @@ User-Interface Without ApvGuessr:<br>
    - The extension will automatically detect and extract the coordinates of the current location.
    - Press `Ctrl + Shift` (ICON WITH EYE) to display a popup alert with the human-readable location information.
    - Press `Ctrl + Space` (ICON WITH PIN) will automatically pin the location on the map (press on a location very near the placed pin otherwise u will keep getting the highest score).
+
+## Be Aware
+
+If you use the automated pin one too many times your account will get banned very easily
