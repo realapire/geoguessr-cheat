@@ -31,14 +31,38 @@ window.addEventListener('message', async function (e) {
     if (msg) {
         try {
             const arr = JSON.parse(msg);
-            lat = arr[1][0][5][0][1][0][2];
-            long = arr[1][0][5][0][1][0][3];
+            let x = false;
+            try {
+                lat = arr[1][0][5][0][1][0][2];
+                long = arr[1][0][5][0][1][0][3];
+                x = true;
+            } catch (e) {
+                // useless to output
+            }
+
+            if (!x) {
+                try {
+                    if (isDecimal(arr[1][5][0][1][0][2]) && isDecimal(arr[1][5][0][1][0][3])) {
+                        lat = arr[1][5][0][1][0][2];
+                        long = arr[1][5][0][1][0][3];
+                    }
+                } catch (e) {
+                    // useless to output
+                }
+            }
+            
             strCoord = null;
         } catch {
             return;
         }
     }
 });
+
+function isDecimal(str) {
+    str = String(str);
+    return !isNaN(str) && str.includes('.') && !isNaN(parseFloat(str));
+}
+
 function convertCoords(lat, long) {
     var latResult, longResult, dmsResult;
     latResult = Math.abs(lat);
@@ -69,37 +93,28 @@ async function getCoordInfo() {
 }
 
 window.addEventListener('load', async function () {
-    let elementsAdded = false;
-
     setInterval(() => {
         let element = document.querySelector('[class^="styles_columnTwo__"]');
 
         if (element) {
-            const hasControlA = element.querySelector('.styles_control__a');
-            const hasControlB = element.querySelector('.styles_control__b');
-
-            if (!hasControlA || !hasControlB) {
-                elementsAdded = false;
-            }
-
-            if (!elementsAdded) {
-                element.innerHTML += `<a href="#" class="styles_control__a" id="tellLocation" style="position: relative; touch-action: pan-x pan-y; background: rgba(0, 0, 0, .6);border: 0;border-bottom: .0625rem solid rgba(0, 0, 0, .4);cursor: pointer;height:40px;display: flex; align-items: center; justify-content: center;width: 40px;border-radius: 50%"><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1); position: absolute;" class='styles_iconReturnToStart__PT25v' src='${chrome.runtime.getURL('assets/view.png')}' style='color: transparent;'></a><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div>`;
-                element.innerHTML += `<a href="#" class="styles_control__b" id="showLocation" style="position: relative; touch-action: pan-x pan-y; background: rgba(0, 0, 0, .6);border: 0;border-bottom: .0625rem solid rgba(0, 0, 0, .4);cursor: pointer;height:40px;display: flex; align-items: center; justify-content: center;width: 40px;border-radius: 50%"><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1); position: absolute;" class='styles_iconReturnToStart__PT25v' src='${chrome.runtime.getURL('assets/pin.png')}' style='color: transparent;'></a><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div>`;
-
+            const childElems = element.querySelectorAll('[class^="styles_control__"]');
+            if (childElems.length != 5) {
+                const pinImg = chrome.runtime.getURL('assets/view.png');
+                const viewImg = chrome.runtime.getURL('assets/pin.png');
+                element.innerHTML += `<a href="#" class="styles_control__a" id="tellLocation" style="margin-bottom: 1rem; position: relative; touch-action: pan-x pan-y; background: rgba(0, 0, 0, .6);border: 0;border-bottom: .0625rem solid rgba(0, 0, 0, .4);cursor: pointer;height:40px;display: flex; align-items: center; justify-content: center;width: 40px;border-radius: 50%"><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1); position: absolute;" class='styles_iconReturnToStart__PT25v' src='${viewImg}' style='color: transparent;'></button><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div>`;
+                element.innerHTML += `<a href="#" class="styles_control__b" id="showLocation" style="margin-bottom: 1rem; position: relative; touch-action: pan-x pan-y; background: rgba(0, 0, 0, .6);border: 0;border-bottom: .0625rem solid rgba(0, 0, 0, .4);cursor: pointer;height:40px;display: flex; align-items: center; justify-content: center;width: 40px;border-radius: 50%"><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1); position: absolute;" class='styles_iconReturnToStart__PT25v' src='${pinImg}' style='color: transparent;'></button><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div>`;
+            
                 document.getElementById('tellLocation').addEventListener('click', async function () {
                     tellLocation();
                 });
-
+            
                 document.getElementById('showLocation').addEventListener('click', async function () {
                     showLocation();
                 });
-
-                elementsAdded = true;
             }
         }
     }, 50);
 });
-
 
 
 document.addEventListener('keydown', async function (event) {
@@ -117,6 +132,5 @@ async function tellLocation() {
 }
 
 async function showLocation() {
-    const zoomParameters = "@47.1840301,6.658821,5.5z"
     window.open(`https://www.google.be/maps/search/${convertCoords(lat, long)}?entry=ttu`);
 }
