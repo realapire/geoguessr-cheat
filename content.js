@@ -124,7 +124,7 @@ window.addEventListener('load', async function () {
 
     const pinImg = 'https://raw.githubusercontent.com/realapire/geoguessr-cheat/ui-fix/assets/view.png';
     const viewImg = 'https://raw.githubusercontent.com/realapire/geoguessr-cheat/ui-fix/assets/pin.png';
-    const safeImg = 'https://raw.githubusercontent.com/realapire/geoguessr-cheat/ui-fix/assets/safe.png';
+    const safeImg = 'https://raw.githubusercontent.com/realapire/geoguessr-cheat/ui-safemode-noalert/assets/safe.png';
 
     setInterval(() => {
         let element = document.querySelector('[class^="styles_columnTwo__"]');
@@ -176,10 +176,10 @@ window.addEventListener('load', async function () {
 
 document.addEventListener('keydown', async function (event) {
     if (lat == 999 && long == 999) return;
-    if (event.ctrlKey && event.code === 'Space') {
+    if (event.ctrlKey && event.code === 'Space' && localStorage.getItem('safeMode') == 'false') {
         autoPlace();
     }
-    if (event.ctrlKey && event.shiftKey) {
+    if (event.ctrlKey && event.shiftKey && localStorage.getItem('safeMode') == 'false') {
         await tellLocation();
     }
 });
