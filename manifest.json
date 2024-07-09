@@ -3,6 +3,9 @@
     "name": "ApvGuessr",
     "version": "0.4.1",
     "description": "Enhance your GeoGuessr experience",
+    "icons": {
+        "128": "assets/APV_GUESSR_LOGO.png"
+      },
     "permissions": [
         "activeTab",
         "tabs",
