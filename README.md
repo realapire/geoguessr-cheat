@@ -16,7 +16,7 @@
    - After installing the extension, navigate to a GeoGuessr game session.
      <br>**KEYBINDS BELOW ONLY WORK WITH SAFE-MODE OFF**
    - Press `Ctrl + Shift` (ICON WITH EYE) to display a custom popup with the location information.
-   - Press `Ctrl + Space` (ICON WITH PIN) will automatically pin the location on the map.
+   - Press `Ctrl + Space` (ICON WITH PIN) will automatically pin the location on the map and submit with a random small delay.
    - Open Settings Tab In-Game and there will be a 'SAFE-MODE' checkbox.
 
 <hr>
