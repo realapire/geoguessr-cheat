@@ -302,7 +302,7 @@ async function autoPlace(safeMode) {
         const key = keys.find(key => key.startsWith("__reactFiber$"));
 
         if (key) {
-            const place = element[key].return.memoizedProps.onMarkerLocationChanged;
+            const place = element[key].return.memoizedProps.onMapClick;
 
             if (safeMode) {
                 lat += getRandomOffset();
